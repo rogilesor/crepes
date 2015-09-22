@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse,Http404
 from django.shortcuts import render
 
 def home(request):
@@ -9,11 +9,17 @@ def home(request):
 
 # Create your views here.
 
+# def view_article(request, id_article):
+#     """Vue qui affiche un article selon son identifiant (ou ID, ici un numero)
+#        Son ID est le second parametre de la fonction (pour rappel, le premier parametre est toujours la requete de l'utilisateur)"""
+#     text = "Vous avez demande l'article #{2} !".format(id_article)
+#     return HttpResponse(text)
+
 def view_article(request, id_article):
-    """Vue qui affiche un article selon son identifiant (ou ID, ici un numero)
-       Son ID est le second parametre de la fonction (pour rappel, le premier parametre est toujours la requete de l'utilisateur)"""
-    text = "Vous avez demande l'article #{0} !".format(id_article)
-    return HttpResponse(text)
+	#si l'ID est superieur à 100 nous considerons que l'article n'existe pas
+    if int(id_article) > 100:
+    	raise Http404
+    return HttpResponse('<h1>Mon article ici</h1>')
 
 def list_articles(request, month, year):
     """Liste des articles d'un mois précis"""
