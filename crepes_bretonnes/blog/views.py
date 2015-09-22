@@ -14,3 +14,8 @@ def view_article(request, id_article):
        Son ID est le second parametre de la fonction (pour rappel, le premier parametre est toujours la requete de l'utilisateur)"""
     text = "Vous avez demande l'article #{0} !".format(id_article)
     return HttpResponse(text)
+
+def list_articles(request, month, year):
+    """Liste des articles d'un mois précis"""
+    text = "Vous avez demandé les articles de {0} {1}".format(month,year)
+    return HttpResponse(text)
