@@ -1,5 +1,7 @@
 from django.http import HttpResponse,Http404
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+
+
 
 def home(request):
     """Exemple de page html, non valide pour que l'exemple soit concis"""
@@ -16,12 +18,19 @@ def home(request):
 #     return HttpResponse(text)
 
 def view_article(request, id_article):
-	#si l'ID est superieur à 100 nous considerons que l'article n'existe pas
+    #si l'ID est superieur à 100 nous considerons que l'article n'existe pas
     if int(id_article) > 100:
-    	raise Http404
-    return HttpResponse('<h1>Mon article ici</h1>')
+        raise Http404
+    return redirect(view_redirection)
+
+def view_redirection(request):
+    return HttpResponse("vous avez été redirigé")
+
+# def list_articles(request, month, year):
+#     """Liste des articles d'un mois précis"""
+#     text = "Vous avez demandé les articles de {0} {1}".format(month,year)
+#     return HttpResponse(text)
 
 def list_articles(request, month, year):
     """Liste des articles d'un mois précis"""
-    text = "Vous avez demandé les articles de {0} {1}".format(month,year)
-    return HttpResponse(text)
+    return redirect("https://www.djangoproject.com")

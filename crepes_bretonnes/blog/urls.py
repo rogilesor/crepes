@@ -6,4 +6,5 @@ urlpatterns = patterns('blog.views',
     url(r'^article/(?P<id_article>\d+)$','view_article'),
 #    url(r'^articles/(\d{4})/(\d{2})$','list_articles'),
     url(r'^articles/(?P<year>\d{4})/(?P<month>\d{2})$','list_articles'),
+    url(r'^redirection$','view_redirection'),
 )
