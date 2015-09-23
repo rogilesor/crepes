@@ -1,6 +1,6 @@
 from django.http import HttpResponse,Http404
 from django.shortcuts import render,redirect
-
+from datetime import datetime
 
 
 def home(request):
@@ -34,3 +34,11 @@ def view_redirection(request):
 def list_articles(request, month, year):
     """Liste des articles d'un mois précis"""
     return redirect("https://www.djangoproject.com")
+
+def date_actuelle(request):
+    return render(request,'blog/date.html',{'date':datetime.now()})
+
+def addition(request, nombre1, nombre2):
+    total = int(nombre1)+int(nombre2)
+    #Retourne nombre1, nombre2 et la somme des deux au tp1
+    return render(request,'blog/addition.html',locals())
