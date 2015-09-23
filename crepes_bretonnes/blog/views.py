@@ -44,4 +44,4 @@ def addition(request, nombre1, nombre2):
     return render(request,'blog/addition.html',locals())
 
 def affiche_temp(request):
-    return render(request,'base.html',locals())
+    return render(request,'blog/baseBlog.html',locals())
