@@ -17,3 +17,17 @@ class Categorie(models.Model):
 	def __str__(self):
 		return self.nom
 
+class Moteur(models.Model):
+	nom = models.CharField(max_length=25)
+
+	def __str__(self):
+		return self.nom
+
+class Voiture(models.Model):
+	nom = models.CharField(max_length=25)
+	moteur = models.OneToOneField(Moteur)
+
+	def __str__(self):
+		return self.nom
+
+
