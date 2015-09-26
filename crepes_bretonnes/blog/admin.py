@@ -31,6 +31,8 @@ class ArticleAdmin(admin.ModelAdmin):
 
     # En-tête de notre colonne
     apercu_contenu.short_description = 'Aperçu du contenu'
+    prepopulated_fields = {'slug': ('titre', ), }
+
 
 admin.site.register(Categorie)
 admin.site.register(Article, ArticleAdmin)
