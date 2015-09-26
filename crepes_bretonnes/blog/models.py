@@ -30,4 +30,26 @@ class Voiture(models.Model):
 	def __str__(self):
 		return self.nom
 
+class Produit(models.Model):
+	nom = models.CharField(max_length=30)
+
+	def __str__(self):
+		return self.nom
+
+class Vendeur(models.Model):
+	nom = models.CharField(max_length=30)
+	produits = models.ManyToManyField(Produit,through='Offre')
+
+	def __str__(self):
+		return self.nom
+
+class Offre(models.Model):
+	prix = models.IntegerField()
+	produit = models.ForeignKey(Produit)
+	vendeur = models.ForeignKey(Vendeur)
+
+	def __str__(self):
+		return "{0} vendu par {1}".format(self.produit, self.vendeur)
+
+		
 
