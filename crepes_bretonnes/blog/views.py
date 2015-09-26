@@ -1,6 +1,7 @@
 from django.http import HttpResponse,Http404
 from django.shortcuts import render,redirect
 from datetime import datetime
+from blog.models import Article
 
 
 def home(request):
@@ -45,3 +46,13 @@ def addition(request, nombre1, nombre2):
 
 def affiche_temp(request):
     return render(request,'blog/baseBlog.html',locals())
+
+
+def accueil(request):
+    """Afficher tous les articles du blog"""
+    articles = Article.objects.all()
+    return render(request,'blog/accueil.html',{'derniers_articles':articles})
+
+def lire(request, id):
+    pass
+
