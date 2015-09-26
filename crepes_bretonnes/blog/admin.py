@@ -7,6 +7,18 @@ class ArticleAdmin(admin.ModelAdmin):
     date_hierarchy = 'date'
     ordering       = ('date', )
     search_fields  = ('titre', 'contenu')
+    # fields = ('titre', 'slug', 'auteur', 'categorie', 'contenu')
+    fieldsets = (
+        ('Général',{
+            'classes':['collapse',],
+            'fields':('titre','slug','auteur','categorie')
+            }),
+        ('Contenu de l\'article',{
+            'description':'Le formulaire accepte les balises HTML',
+            'fields':('contenu',)
+            }),
+        )
+
 
     def apercu_contenu(self, article):
         text = article.contenu
