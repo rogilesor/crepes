@@ -2,7 +2,7 @@ from django.http import HttpResponse,Http404
 from django.shortcuts import render,redirect
 from datetime import datetime
 from blog.models import Article
-
+from django.shortcuts import render, get_object_or_404
 
 def home(request):
     """Exemple de page html, non valide pour que l'exemple soit concis"""
@@ -54,5 +54,7 @@ def accueil(request):
     return render(request,'blog/accueil.html',{'derniers_articles':articles})
 
 def lire(request, id):
-    pass
+    article = get_object_or_404(Article, id=id)
+    return render(request,'blog/lire.html',{'article':article})
+
 
