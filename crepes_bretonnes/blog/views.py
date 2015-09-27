@@ -3,6 +3,8 @@ from django.shortcuts import render,redirect
 from datetime import datetime
 from blog.models import Article
 from django.shortcuts import render, get_object_or_404
+from blog.formulaires import ContactForm
+
 
 def home(request):
     """Exemple de page html, non valide pour que l'exemple soit concis"""
@@ -57,4 +59,19 @@ def lire(request, id, slug):
     article = get_object_or_404(Article, id=id,slug=slug)
     return render(request,'blog/lire.html',{'article':article})
 
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
 
+        if form.is_valid():
+            sujet = form.cleaned_data['sujet']
+            message = form.cleaned_data['message']
+            envoyeur = form.cleaned_data['envoyeur']
+            renvoi = form.cleaned_data['renvoi']
+
+            envoi = True
+
+    else :
+            form = ContactForm()
+
+    return render(request,'blog/contact.html',locals())
