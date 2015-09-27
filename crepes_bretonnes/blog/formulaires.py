@@ -19,5 +19,7 @@ class ContactForm(forms.Form):
 
 		if sujet and message :
 			if "pizza" in sujet and "pizza" in message:
+				msg = "Vous parlez déjà de pizzas dans le sujet, n'en parlez plus dans le message"
+				self.add_error("message",msg)
 				raise forms.ValidationError("Vous parlez trop des pizzas")
 		return cleaned_data
