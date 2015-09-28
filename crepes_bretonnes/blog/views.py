@@ -76,5 +76,11 @@ def contact(request):
     return render(request,'blog/contact.html',locals())
 
 def art_model(request):
-    form = ArticleForm()
+    if request.method == 'POST':
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            envoi = True
+    else :
+        form = ArticleForm()
     return render(request,'blog/enregistrer_article.html',locals())

@@ -1,6 +1,9 @@
 from django.http import HttpResponse,Http404
 from django.shortcuts import render,redirect
 from datetime import datetime
+from blog.models import Article
+from django.shortcuts import render, get_object_or_404
+from blog.formulaires import ContactForm, ArticleForm
 
 
 def home(request):
@@ -44,4 +47,34 @@ def addition(request, nombre1, nombre2):
     return render(request,'blog/addition.html',locals())
 
 def affiche_temp(request):
-    return render(request,'base.html',locals())
+    return render(request,'blog/baseBlog.html',locals())
+
+def accueil(request):
+    """Afficher tous les articles du blog"""
+    articles = Article.objects.all()
+    return render(request,'blog/accueil.html',{'derniers_articles':articles})
+
+def lire(request, id, slug):
+    article = get_object_or_404(Article, id=id,slug=slug)
+    return render(request,'blog/lire.html',{'article':article})
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            sujet = form.cleaned_data['sujet']
+            message = form.cleaned_data['message']
+            envoyeur = form.cleaned_data['envoyeur']
+            renvoi = form.cleaned_data['renvoi']
+
+            envoi = True
+
+    else :
+            form = ContactForm()
+
+    return render(request,'blog/contact.html',locals())
+
+def art_model(request):
+    form = ArticleForm()
+    return render(request,'blog/enregistrer_article.html',locals())
