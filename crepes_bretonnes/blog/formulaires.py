@@ -1,4 +1,6 @@
 from django import forms
+from blog.models import Article
+
 
 class ContactForm(forms.Form):
 	sujet = forms.CharField(max_length=100)
@@ -23,3 +25,15 @@ class ContactForm(forms.Form):
 				self.add_error("message",msg)
 				raise forms.ValidationError("Vous parlez trop des pizzas")
 		return cleaned_data
+
+class ArticleForm(forms.ModelForm):
+	class Meta:
+		model = Article
+		fields=(
+					'titre',
+					'slug', 
+					'auteur',
+					'contenu',
+					'categorie',
+				)
+

@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect
 from datetime import datetime
 from blog.models import Article
 from django.shortcuts import render, get_object_or_404
-from blog.formulaires import ContactForm
+from blog.formulaires import ContactForm, ArticleForm
 
 
 def home(request):
@@ -49,7 +49,6 @@ def addition(request, nombre1, nombre2):
 def affiche_temp(request):
     return render(request,'blog/baseBlog.html',locals())
 
-
 def accueil(request):
     """Afficher tous les articles du blog"""
     articles = Article.objects.all()
@@ -75,3 +74,7 @@ def contact(request):
             form = ContactForm()
 
     return render(request,'blog/contact.html',locals())
+
+def art_model(request):
+    form = ArticleForm()
+    return render(request,'blog/enregistrer_article.html',locals())
