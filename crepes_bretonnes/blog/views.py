@@ -1,9 +1,9 @@
 from django.http import HttpResponse,Http404
 from django.shortcuts import render,redirect
 from datetime import datetime
-from blog.models import Article
+from blog.models import Article, Contact
 from django.shortcuts import render, get_object_or_404
-from blog.formulaires import ContactForm, ArticleForm
+from blog.formulaires import ContactForm, ArticleForm, NouveauContactForm
 
 
 def home(request):
@@ -80,7 +80,30 @@ def art_model(request):
         form = ArticleForm(request.POST)
         if form.is_valid():
             form.save()
+            titre = form.cleaned_data['titre']    
+            slug = ""
+            auteur=""
+            contenu=""
+            categorie=""
             envoi = True
     else :
         form = ArticleForm()
     return render(request,'blog/enregistrer_article.html',locals())
+
+def nouveau_contact(request):
+    sauvegarde = False
+
+    if request.method == "POST":
+        form = NouveauContactForm(request.POST, request.FILES)
+        if form.is_valid():
+            contact = Contact()
+            contact.nom = form.cleaned_data["nom"]
+            contact.adresse = form.cleaned_data["adresse"]
+            contact.photo = form.cleaned_data["photo"]
+            contact.save()
+
+            sauvegarde = True
+        else :
+            form = NouveauContactForm()
+
+    return render(request, 'blog/contact.html', locals())

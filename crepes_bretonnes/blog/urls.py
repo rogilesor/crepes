@@ -11,6 +11,6 @@ urlpatterns = patterns('blog.views',
     url(r'^date$','date_actuelle'),
     url(r'^addition/(?P<nombre1>\d+)/(?P<nombre2>\d+)/$','addition'),
     url(r'^test$','affiche_temp'),
-    url(r'^contact/$','contact'),
+    url(r'^contact/$','nouveau_contact'),
     url(r'^Earticle/$','art_model'),
 )

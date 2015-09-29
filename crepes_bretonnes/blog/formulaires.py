@@ -37,3 +37,8 @@ class ArticleForm(forms.ModelForm):
 					'categorie',
 				)
 
+class NouveauContactForm(forms.Form):
+	nom = forms.CharField()
+	adresse = forms.CharField(widget=forms.Textarea)
+	photo = forms.ImageField()
+
