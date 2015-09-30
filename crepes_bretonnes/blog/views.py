@@ -4,7 +4,7 @@ from datetime import datetime
 from blog.models import Article, Contact
 from django.shortcuts import render, get_object_or_404
 from blog.formulaires import ContactForm, ArticleForm, NouveauContactForm
-
+from crepes_bretonnes.settings import BASE_DIR
 
 def home(request):
     """Exemple de page html, non valide pour que l'exemple soit concis"""
@@ -107,3 +107,8 @@ def nouveau_contact(request):
             form = NouveauContactForm()
 
     return render(request, 'blog/contact.html', locals())
+
+def voir_contacts(request):
+    dossier = BASE_DIR+'/photos/'
+    contacts = Contact.objects.all()
+    return render(request,'blog/voir_contacts.html',{'contacts':contacts,'dossier':dossier})

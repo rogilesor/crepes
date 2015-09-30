@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Categorie, Article
+from blog.models import Categorie, Article, Contact
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display   = ('titre', 'categorie', 'auteur', 'date', 'apercu_contenu')
@@ -36,3 +36,4 @@ class ArticleAdmin(admin.ModelAdmin):
 
 admin.site.register(Categorie)
 admin.site.register(Article, ArticleAdmin)
+# admin.site.register(Contact)
